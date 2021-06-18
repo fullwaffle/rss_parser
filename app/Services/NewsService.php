@@ -9,6 +9,13 @@ use Illuminate\Http\Client\Response;
 
 class NewsService
 {
+    protected object $news;
+
+    public function __construct(News $news)
+    {
+        $this->news = $news;
+    }
+
     public function processFeed(Response $rssFeed): mixed
     {
         $xml = simplexml_load_string($rssFeed->body(), null, LIBXML_NOCDATA);
@@ -68,7 +75,7 @@ class NewsService
 
     public function store(array $newsItem): void
     {
-        News::firstOrCreate([
+        $this->news->firstOrCreate([
             'name' => $newsItem['title'],
             'link' => $newsItem['link'],
             'description' => $newsItem['description'],

@@ -6,8 +6,7 @@
 2. Type `./vendor/bin/sail up` (-d for background work)  in console to launch server instance
 # Cron guide
 1. (OPTIONAL) Replace `rss_parser_laravel.test_1` with your container id or name in the script
-2. Type `crontab -e` in console to edit crontab file
-3. Replace `* * * * *` according to your needs
+2. Replace `* * * * *` in the script according to your needs
 ```
  .---------------- minute (0 - 59)
  |  .------------- hour (0 - 23)
@@ -18,11 +17,12 @@
  |  |  |  |  |               
  *  *  *  *  *  
 ```
+3. Type `crontab -e` in console to edit crontab file
 4. Add script Below to crontab file
 
 ```
 MAILTO=""
 SHELL=/bin/bash
 
-* * * * * docker exec -t rss_parser_laravel.test_1 php /var/www/html/public/index.php
+* * * * * docker exec -t rss_parser_laravel.test_1 bash -c "php artisan migrate; php /var/www/html/public/index.php"
 ```

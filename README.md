@@ -6,22 +6,12 @@
 2. Type `./vendor/bin/sail up` (add `-d` key for background work)  in console to launch server instance
 3. Wait for it to finish
 # Cron guide
-1. Replace `* * * * *` in the script according to your needs (https://crontab.guru/)
-```
- .---------------- minute (0 - 59)
- |  .------------- hour (0 - 23)
- |  |  .---------- day of month (1 - 31)
- |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr …
- |  |  |  |  .---- day of week (0-6) (Sunday=0 or 7)
- |  |  |  |  |            OR sun,mon,tue,wed,thr,fri,sat
- |  |  |  |  |               
- *  *  *  *  *  
-```
+1. Replace `everyMinute()` in `app\Console\Kernel.php` (https://laravel.com/docs/8.x/scheduling#schedule-frequency-options)
 2. Type `crontab -e` in console to edit crontab file
 3. Add script to crontab file
 ```
 MAILTO=""
 SHELL=/bin/bash
 
-* * * * * docker exec -t rbc_rss_parser bash -c "php artisan migrate; php /var/www/html/public/index.php"
+* * * * * docker exec -t rbc_rss_parser bash -c "php artisan migrate; php artisan schedule:run"
 ```

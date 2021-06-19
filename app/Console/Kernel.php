@@ -2,6 +2,10 @@
 
 namespace App\Console;
 
+use App\Http\Controllers\NewsController;
+use App\Models\News;
+use App\Services\LogService;
+use App\Services\NewsService;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,7 +28,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function (LogService $logService, News $news, NewsService $newsService) {
+            $controller = new NewsController($logService, $news, $newsService);
+            $controller->index();
+        })->everyMinute();
     }
 
     /**

@@ -6,7 +6,7 @@
 2. Type `./vendor/bin/sail up` (add `-d` key for background work)  in console to launch server instance
 3. Wait for it to finish
 4. Install admin panel and run migrations `./vendor/bin/sail artisan voyager:install`
-5. Add admin user `php artisan voyager:admin your@email.com --create`
+5. Add admin user `./vendor/bin/sail artisan voyager:admin your@email.com --create`
 6. Admin panel accessible with `admin` prefix e.g. `localhost/admin`
 # Cron guide
 1. Replace `everyMinute()` in `app\Console\Kernel.php` (https://laravel.com/docs/8.x/scheduling#schedule-frequency-options)

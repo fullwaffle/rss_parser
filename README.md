@@ -18,3 +18,5 @@ SHELL=/bin/bash
 
 * * * * * docker exec -t rbc_rss_parser php artisan schedule:run
 ```
+# Admin panel guide
+1. Open `/admin/database` and add BREAD to `news` and `logs` table. Model names are `App\Models\News` and `App\Models\Log`. You can leave controller name empty.
